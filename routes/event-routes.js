@@ -7,13 +7,13 @@ const Event = require("../models/event-model");
 const User = require("../models/user-model");
 
 router.get("/events", (req, res, next) => {
-    Event.find()
-    .then(event =>{
-        res.json(event);
-        console.log(event)
+  Event.find()
+    .then(event => {
+      res.json(event);
+      console.log(event)
     })
     .catch(err => {
-        res.status(500).json({ err })
+      res.status(500).json({ err })
     })
 })
 
@@ -27,15 +27,15 @@ router.post("/event", (req, res, next) => {
     title: req.body.title,
     description: req.body.description,
     location: {
-        name: req.body.location.name,
-        address: req.body.location.address,
-        lat: req.body.location.lat,
-        lon: req.body.location.lon,
-        id: req.body.location.id
-      },
+      name: req.body.location.name,
+      address: req.body.location.address,
+      lat: req.body.location.lat,
+      lon: req.body.location.lon,
+      id: req.body.location.id
+    },
     // status: "active", 
-    // user: req.user._id,
-    user: req.body.user,
+    user: req.user._id,
+    // user: req.body.user,
     date: req.body.date,
     sport: req.body.sport,
     img: req.body.img,
@@ -48,5 +48,15 @@ router.post("/event", (req, res, next) => {
       res.json(err);
     });
 });
+
+router.get("/myevents", (req, res, next) => {
+  if (!req.user) {
+    res.json('No user logged in')
+  } else {
+    Event.find({ user: req.user._id }).then(allMyEvents => {
+      res.json(allMyEvents)
+    })
+  }
+})
 
 module.exports = router;
