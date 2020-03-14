@@ -10,7 +10,7 @@ router.get("/events", (req, res, next) => {
   Event.find()
     .then(event => {
       res.json(event);
-      console.log(event)
+      // console.log(event)
     })
     .catch(err => {
       res.status(500).json({ err })
@@ -22,7 +22,7 @@ router.post("/event", (req, res, next) => {
   //  console.log("-=-=-=-=-=-=-=-=-=-=-=-=-",req.body, req.session, req.user)
   // console.log(req.user._id);
   // console.log(req.user);
-  console.log(req.body)
+  // console.log(req.body)
   Event.create({
     title: req.body.title,
     description: req.body.description,
@@ -31,7 +31,8 @@ router.post("/event", (req, res, next) => {
       address: req.body.location.address,
       lat: req.body.location.lat,
       lon: req.body.location.lon,
-      id: req.body.location.id
+      md_parks_id: req.body.location.md_parks_id,
+      place_id: req.body.location.place_id
     },
     // status: "active", 
     user: req.user._id,
@@ -39,7 +40,7 @@ router.post("/event", (req, res, next) => {
     date: req.body.date,
     sport: req.body.sport,
     img: req.body.img,
-    time: req.body.time
+    // time: req.body.time
   })
     .then(response => {
       res.json(response);
