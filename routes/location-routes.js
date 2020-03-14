@@ -1,8 +1,8 @@
-const express = require.express();
-const mongoose = require.mongoose();
-const router = express.router();
+const express = require("express");
+const mongoose = require("mongoose");
+const router = express.Router();
 
-const Location = require('../models/location-model.js');
+const Location = require("../models/location-model");
 
 router.post("/newlocation", (req, res, next) => {
     console.log(req.body)
@@ -17,3 +17,4 @@ router.post("/newlocation", (req, res, next) => {
     })
 })
 
+module.exports = router;
