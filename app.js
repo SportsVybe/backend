@@ -63,7 +63,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // routes
 app.use('/api', require('./routes/event-routes'));
 app.use('/api', require('./routes/auth-routes'));
-app.use('/api', require('./routes/location-routes'));
+app.use('/api', require('./routes/venue-routes'));
 
 
 module.exports = app;

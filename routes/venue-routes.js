@@ -2,9 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 
-const Location = require("../models/location-model");
+const Location = require("../models/venue-model");
 
-router.post("/newlocation", (req, res, next) => {
+router.post("/newvenue", (req, res, next) => {
     console.log(req.body)
     Location.create(
         req.body
@@ -16,5 +16,7 @@ router.post("/newlocation", (req, res, next) => {
         res.json(err);
     })
 })
+
+router.get("/venues")
 
 module.exports = router;
