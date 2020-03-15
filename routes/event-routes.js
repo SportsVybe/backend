@@ -26,13 +26,13 @@ router.post("/event", (req, res, next) => {
   Event.create({
     title: req.body.title,
     description: req.body.description,
-    location: {
-      name: req.body.location.name,
-      address: req.body.location.address,
-      lat: req.body.location.lat,
-      lon: req.body.location.lon,
-      md_parks_id: req.body.location.md_parks_id,
-      place_id: req.body.location.place_id
+    venue: {
+      name: req.body.venue.name,
+      address: req.body.venue.address,
+      lat: req.body.venue.lat,
+      lon: req.body.venue.lon,
+      md_parks_id: req.body.venue.md_parks_id,
+      place_id: req.body.venue.place_id
     },
     // status: "active", 
     user: req.user._id,
@@ -54,7 +54,8 @@ router.get("/myevents", (req, res, next) => {
   if (!req.user) {
     res.json('No user logged in')
   } else {
-    Event.find({ user: req.user._id }).then(allMyEvents => {
+    Event.find({ user: req.user._id })
+    .then(allMyEvents => {
       res.json(allMyEvents)
     })
   }

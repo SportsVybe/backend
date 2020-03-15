@@ -5,7 +5,7 @@ const User = require('./user-model');
 const eventSchema = new Schema({
     title: String,
     description: String,
-    location: {
+    venue: {
         name: String,
         address: String,
         lat: Number,

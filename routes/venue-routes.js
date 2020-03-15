@@ -2,11 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 
-const Location = require("../models/venue-model");
+const Venue = require("../models/venue-model");
 
 router.post("/newvenue", (req, res, next) => {
-    console.log(req.body)
-    Location.create(
+    // console.log(req.body)
+    Venue.create(
         req.body
     )
     .then(response => {
@@ -17,6 +17,16 @@ router.post("/newvenue", (req, res, next) => {
     })
 })
 
-router.get("/venues")
+router.get("/venues", (req, res, next) => {
+
+    Venue.find()
+    .then(venue=>{
+        res.json(venue)
+    })
+    .catch(err => {
+        res.json(err)
+    })
+
+})
 
 module.exports = router;
