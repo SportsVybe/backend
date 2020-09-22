@@ -5,37 +5,20 @@ const router = express.Router();
 // import the model that will be used for the events collection
 const Event = require("../models/event-model");
 const User = require("../models/user-model");
+const Venue = require("../models/venue-model");
 
-router.get("/events", (req, res, next) => {
-  Event.find()
-    .then(event => {
-      res.json(event);
-      // console.log(event)
-    })
-    .catch(err => {
-      res.status(500).json({ err })
-    })
-})
-
-// POST route => to create a new event
-router.post("/event", (req, res, next) => {
-  //  console.log("-=-=-=-=-=-=-=-=-=-=-=-=-",req.body, req.session, req.user)
-  // console.log(req.user._id);
-  // console.log(req.user);
-  // console.log(req.body)
+// Create event
+router.post("/event/create", (req, res, next) => {
+  
+  //console.log(req.body)
+  //console.log(req.venue)
   Event.create({
     title: req.body.title,
     description: req.body.description,
-    venue: {
-      name: req.body.venue.name,
-      address: req.body.venue.address,
-      lat: req.body.venue.lat,
-      lon: req.body.venue.lon,
-      md_parks_id: req.body.venue.md_parks_id,
-      place_id: req.body.venue.place_id
-    },
+    venue_id: req.body.venue_id,
+    venue: req.body.venue,
     // status: "active", 
-    user: req.user._id,
+    // user: req.user._id,
     // user: req.body.user,
     date: req.body.date,
     sport: req.body.sport,
@@ -50,6 +33,19 @@ router.post("/event", (req, res, next) => {
     });
 });
 
+//Request events
+router.get("/events", (req, res, next) => {
+  Event.find()
+    .then(event => {
+      res.json(event);
+      // console.log(event)
+    })
+    .catch(err => {
+      res.status(500).json({ err })
+    })
+})
+
+//Request user events
 router.get("/myevents", (req, res, next) => {
   if (!req.user) {
     res.json('No user logged in')

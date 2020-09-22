@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../models/user-model");
 const passport = require("../config/passport");
 
-// signup POST
+// Create user
 router.post("/signup", (req, res, err) => {
   let password = req.body.password;
   let incomingUserObj = {
@@ -23,8 +23,7 @@ router.post("/signup", (req, res, err) => {
     });
 });
 
-
-// check if user is logged in,
+//Request user is logged in
 router.get("/isLoggedIn", (req, res, next) => {
   // console.log("checking logged in");
   // console.log("this is user", req.user);
